@@ -17,5 +17,6 @@ connectDB()
 const PORT = process.env.PORT || process.env.port
 
 app.listen(PORT, err => {
-    err ? console.log('Server connection failed', err) : console.log(`The server is running on port ${PORT}`)
+    err ? console.log('Server connection failed', err)
+        : console.log(`The server is running on port ${PORT}`)
 })

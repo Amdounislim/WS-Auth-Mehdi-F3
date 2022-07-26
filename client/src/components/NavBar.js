@@ -1,10 +1,30 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { logout } from '../JS/actions/userAction'
 
 const NavBar = () => {
-  return (
-    <div>
-        <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+    const isAuth = useSelector(state => state.userReducer.isAuth)
+    const dispatch = useDispatch()
+    return (
+        <div>{
+            isAuth ? (<nav className="navbar navbar-expand-lg navbar-light fixed-top">
+                <div className="container">
+                    <Link className="navbar-brand" to={"/login"}>
+                        Authentification Passport
+                    </Link>
+                    <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" to='/' onClick={() => dispatch(logout())} >
+                                    Log_out
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>)
+                : (<nav className="navbar navbar-expand-lg navbar-light fixed-top">
                     <div className="container">
                         <Link className="navbar-brand" to={"/login"}>
                             Authentification Passport
@@ -24,9 +44,9 @@ const NavBar = () => {
                             </ul>
                         </div>
                     </div>
-                </nav>
-    </div>
-  )
+                </nav>)
+        }</div>
+    )
 }
 
 export default NavBar
